@@ -28,6 +28,9 @@ public:
 	UFUNCTION()
 	void HandleOnReachedJumpApex();
 
+	UFUNCTION()
+	void HandleOnLanded(const FHitResult& hit);
+
 protected:
 
 	/** Called for forwards/backward input */

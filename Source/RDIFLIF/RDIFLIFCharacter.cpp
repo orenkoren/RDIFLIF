@@ -53,6 +53,7 @@ ARDIFLIFCharacter::ARDIFLIFCharacter()
 	// Add dynamic delegate + turn on OnReachedJumpApex notifications
 	GetCharacterMovement()->bNotifyApex = true;
 	OnReachedJumpApex.AddDynamic(this, &ARDIFLIFCharacter::HandleOnReachedJumpApex);
+	LandedDelegate.AddDynamic(this, &ARDIFLIFCharacter::HandleOnLanded);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -107,6 +108,11 @@ void ARDIFLIFCharacter::HandleOnReachedJumpApex()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Reached Jump Apex"));
 	GetCharacterMovement()->bNotifyApex = true;
+}
+
+void ARDIFLIFCharacter::HandleOnLanded(const FHitResult& hit)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Landed"));
 }
 
 void ARDIFLIFCharacter::MoveForward(float Value)
