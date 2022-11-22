@@ -25,6 +25,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Input)
 	float TurnRateGamepad;
 
+	UFUNCTION()
+	void HandleOnReachedJumpApex();
+
 protected:
 
 	/** Called for forwards/backward input */

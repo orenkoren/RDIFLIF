@@ -49,6 +49,13 @@ ARDIFLIFCharacter::ARDIFLIFCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named ThirdPersonCharacter (to avoid direct content references in C++)
+
+	// set bNotifyApex to true
+	//UE_LOG(LogTemp, Warning, TEXT("bNotifyApex is %s"), GetCharacterMovement()->bNotifyApex);
+	GetCharacterMovement()->bNotifyApex = true;
+	//UE_LOG(LogTemp, Warning, TEXT("bNotifyApex is %s"), GetCharacterMovement()->bNotifyApex);
+	// Add dynamic delegate
+	OnReachedJumpApex.AddDynamic(this, &ARDIFLIFCharacter::HandleOnReachedJumpApex);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -97,6 +104,11 @@ void ARDIFLIFCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
+}
+
+void ARDIFLIFCharacter::HandleOnReachedJumpApex()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Reached Jump Apex"));
 }
 
 void ARDIFLIFCharacter::MoveForward(float Value)
