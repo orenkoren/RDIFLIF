@@ -106,13 +106,24 @@ void ARDIFLIFCharacter::LookUpAtRate(float Rate)
 
 void ARDIFLIFCharacter::HandleOnReachedJumpApex()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Reached Jump Apex"));
-	GetCharacterMovement()->bNotifyApex = true;
+	StopGravity();
+	GetWorldTimerManager().SetTimer(_handle, this, &ARDIFLIFCharacter::ResumeGravity, 3.0f, false);
 }
 
 void ARDIFLIFCharacter::HandleOnLanded(const FHitResult& hit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Landed"));
+	GetCharacterMovement()->GravityScale = 1;
+	GetCharacterMovement()->bNotifyApex = true;
+}
+
+void ARDIFLIFCharacter::StopGravity()
+{
+	GetCharacterMovement()->GravityScale = 0;
+}
+
+void ARDIFLIFCharacter::ResumeGravity()
+{
+	GetCharacterMovement()->GravityScale = 3;
 }
 
 void ARDIFLIFCharacter::MoveForward(float Value)

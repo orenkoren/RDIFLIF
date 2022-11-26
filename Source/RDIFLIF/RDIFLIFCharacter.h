@@ -31,6 +31,12 @@ public:
 	UFUNCTION()
 	void HandleOnLanded(const FHitResult& hit);
 
+	UFUNCTION()
+	void StopGravity();
+
+	UFUNCTION()
+	void ResumeGravity();
+
 protected:
 
 	/** Called for forwards/backward input */
@@ -67,5 +73,8 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+private:
+	FTimerHandle _handle;
 };
 
